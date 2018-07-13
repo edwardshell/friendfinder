@@ -9,17 +9,27 @@ module.exports = function(app) {
     var newFriend = req.body;
     var newFriendScores = newFriend.scores;
 
+    var lowestScore = 999;
+    var bestMatch;
+
     for (var i = 0; i < friendsArr.length; i++) {
       var scoresArr = friendsArr[i].scores;
+      var totalDiff = 0;
 
-      var lowestScore = 10;
-      var bestMatch;
       for (var j = 0; j < scoresArr.length; j++) {
-        var diff = Math.abs(parseInt(newFriendScores[j]) - parseInt(scoresArr[j]));
-        console.log(diff);
+        var diff = Math.abs(
+          parseInt(newFriendScores[j]) - parseInt(scoresArr[j])
+        );
+        totalDiff += diff;
+      }
+
+      if (totalDiff < lowestScore) {
+        var lowestScore = totalDiff;
+        var bestMatch = friendsArr[i];
+        
       }
     }
     friendsArr.push(newFriend);
-    res.json(true);
+    res.json(bestMatch);
   });
 };
