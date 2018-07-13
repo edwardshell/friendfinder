@@ -224,7 +224,7 @@
 
         $.post("/api/friends", newFriend, function (data) {
             if (data) {
-                alert("One second while we find your match!");
+              console.log(data);
             }
 
             $("#name").val("");
