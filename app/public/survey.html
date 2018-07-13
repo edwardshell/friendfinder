@@ -35,6 +35,22 @@
                 <h2>Survey Questions for the Match Maker</h2>
             </div>
         </div>
+        <div id="myModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">You matched with...</h5>
+
+                    </div>
+                    <div id="myInput" class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cool.</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <hr/>
         <form role="form">
             <div class="form-group">
@@ -157,7 +173,7 @@
                 </select>
             </div>
             <br>
-            <button type="submit" id="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+            <button type="submit" id="submit" data-target="#myModal" data-toggle="modal" class="btn btn-primary btn-lg btn-block">Submit</button>
             <br>
         </form>
 
@@ -167,36 +183,22 @@
             <div class="container">
                 <p>
                     <a href="/api/friends">API Friends Link</a> |
-                    <a href="https://github.com/afhaque/HotRestaurant">GitHub Repo</a>
+                    <a href="https://github.com/afhaque/HotRestaurant">GitHub Repo</a> |
+                    <a href="/">Home</a>
                 </p>
             </div>
         </footer>
     </div>
     <br>
     <br>
-    <div class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">You matched with...</h5>
 
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cool.</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>
 
 <script type="text/javascript">
 
-    
+
 
     $("#submit").on("click", function (event) {
         event.preventDefault();
@@ -238,8 +240,9 @@
             $("#q9").val("1");
             $("#q10").val("1");
 
-            console.log(data.bestMatch);
-           
+            $('#myInput').append("<p>" + data.name + " | " + data.photo + "!</p>");
+
+
         });
 
 
